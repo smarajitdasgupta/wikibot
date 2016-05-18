@@ -33,7 +33,7 @@ app.post('/post', function(req, res){
       var obj = data.query.pages;
 
       var first_page = obj[Object.keys(obj)[0]];
-      var first_snippet = first_page.extract.substring(0,350)+'...';
+      var first_snippet = first_page.extract.substring(0,250)+'...';
       var result_url = 'http://en.wikipedia.org/wiki/' + first_page.title;
 
       var return_result =  result_url + " " + first_snippet;
