@@ -1,5 +1,5 @@
 {
-  "name": "slack-pedia",
+  "name": "wikibot",
   "version": "1.0.0",
   "description": "_A Slackbot that searches wikipedia_",
   "main": "index.js",
