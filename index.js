@@ -59,7 +59,7 @@ var first_creator = "Creator name";
 
 
 request({ 
-    url: 'https://en.wikipedia.org/w/api.php?exintro=&explaintext=&format=json&action=query&prop=extracts&titles=india',
+    url: 'http://wiki.news.com.au/rest/prototype/1/search/name.json?query=jpml',
     method: 'POST',
     //proxy: 'http://pac.news.net.au/proxy.pac',
     body: 'Hello'
