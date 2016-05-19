@@ -62,7 +62,7 @@ request({
     url: 'http://wiki.news.com.au/rest/prototype/1/search/name.json?query=jpml',
     method: 'POST',
     proxy: 'http://pac.news.net.au/proxy.pac',
-    body: body
+    body: 'Hello'
   }, function(error, response, body){
     if(error) {
         console.log(error);
@@ -71,7 +71,7 @@ request({
     }
 
     res.json({ 
-      data: { body: 'Hello' } 
+      data: { body: body } 
     })
 });
 
