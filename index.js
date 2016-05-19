@@ -67,7 +67,7 @@ request({
     if(error) {
         console.log(error);
     } else {
-      console.log(response.statusCode, body);
+      console.log(res.statusCode, body);
     }
 
     res.json({ 
