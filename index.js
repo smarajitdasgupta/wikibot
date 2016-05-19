@@ -71,7 +71,7 @@ request({
     }
 
     res.json({ 
-      data: { body: body } 
+      data: { body: 'Hello' } 
     })
 });
 
