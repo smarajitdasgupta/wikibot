@@ -63,7 +63,7 @@ request({
     method: 'POST',
     proxy: 'http://pac.news.net.au/proxy.pac',
     body: 'Hello'
-  }, function(error, response, body){
+  }, function(error, res, body){
     if(error) {
         console.log(error);
     } else {
