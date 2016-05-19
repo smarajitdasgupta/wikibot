@@ -70,7 +70,7 @@ request({
       console.log(res.statusCode, body);
     }
 
-    res.send(body);
+    res.end();
 });
 
 
