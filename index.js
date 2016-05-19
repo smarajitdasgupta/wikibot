@@ -15,9 +15,15 @@ app.get('/', function(req, res){
 
 app.post('/post', function(req, res){
   var parsed_url = url.format({
-    pathname: 'http://wiki.news.com.au/rest/prototype/1/search/name.json',
+    pathname: 'https://en.wikipedia.org/w/api.php',
     query: {
-      query: req.body.text // search query
+      action: 'query',
+      prop: 'extracts',
+      exintro: '',
+      explaintext: '',
+      prop: 'extracts',
+      format: 'json', //json format
+      titles: req.body.text // search query
     }
   });
 
