@@ -59,7 +59,7 @@ var first_creator = "Creator name";
 
 
 request({ 
-    url: 'http://wiki.news.com.au/rest/prototype/1/search/name.json?query=jpml',
+    url: 'http://wiki.news.com.au/rest/prototype/1/search?query=jpml',
     method: 'POST',
     proxy: 'http://pac.news.net.au/proxy.pac',
     body: 'Hello'
