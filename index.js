@@ -61,7 +61,7 @@ var first_creator = "Creator name";
 request({ 
     url: 'https://en.wikipedia.org/w/api.php?exintro=&explaintext=&format=json&action=query&prop=extracts&titles=india',
     method: 'POST',
-    proxy: 'http://pac.news.net.au/proxy.pac',
+    //proxy: 'http://pac.news.net.au/proxy.pac',
     body: 'Hello'
   }, function(error, res, body){
     if(error) {
