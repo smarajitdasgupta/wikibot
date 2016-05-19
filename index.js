@@ -14,7 +14,7 @@ app.get('/', function(req, res){
   res.send('Wiki News works fine!!');
 });
 
-app.post('/post', function(req, res){
+/*app.post('/post', function(req, res){
   var parsed_url = url.format({
     pathname: 'http://wiki.news.com.au/rest/prototype/1/search/name.json',
     query: {
@@ -55,7 +55,27 @@ var first_creator = "Creator name";
       res.send(body);
     }
   });
+});*/
+
+
+request({ 
+    url: 'http://wiki.news.com.au/rest/prototype/1/search/name.json',
+    method: 'POST',
+    proxy: 'http://pac.news.net.au/proxy.pac',
+  ,
+    body: body
+  }, function(error, response, body){
+    if(error) {
+        console.log(error);
+    } else {
+      console.log(response.statusCode, body);
+    }
+
+    res.json({ 
+      data: { body: body } 
+    })
 });
+
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
