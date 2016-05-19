@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', (process.env.PORT || 9001));
 
+
 app.get('/', function(req, res){
   res.send('Wiki News works fine!!');
 });
@@ -21,7 +22,9 @@ app.post('/post', function(req, res){
     }
   });
 
-  request(parsed_url, function (error, response, body) {
+console.log(parsed_url);
+
+  request(parsed_url, {timeout: 1500}, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var data = JSON.parse(body);
       //var obj = data.group;
