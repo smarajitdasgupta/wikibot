@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', (process.env.PORT || 9001));
 
 app.get('/', function(req, res){
-  res.send('Wiki news works fine!!');
+  res.send('Wiki News works fine!!');
 });
 
 app.post('/post', function(req, res){
@@ -28,8 +28,11 @@ app.post('/post', function(req, res){
 
       var first_item = obj[Object.keys(obj)[0]];
      // var first_snippet = first_page.extract.substring(0,250)+'...';
-      var first_title = first_item.result[0].title;
-      var first_creator = (first_item.result[0].creator ? first_item.result[0].creator.displayName : "Anonymous")
+    //  var first_title = first_item.result[0].title;
+     // var first_creator = (first_item.result[0].creator ? first_item.result[0].creator.displayName : "Anonymous")
+
+var first_title = "Title here";
+var first_creator = "Creator name";
 
     //  var result_url = 'http://en.wikipedia.org/wiki/' + first_page.title;
 
@@ -40,7 +43,7 @@ app.post('/post', function(req, res){
         attachments: [
         {
             title: first_title,
-         //   title_link: result_url,
+           title_link: 'http://google.com',
             text: first_creator
         }
     ]
