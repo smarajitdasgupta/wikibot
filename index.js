@@ -70,9 +70,7 @@ request({
       console.log(res.statusCode, body);
     }
 
-    res.json({ 
-      data: { body: body } 
-    })
+    res.send(body);
 });
 
 
