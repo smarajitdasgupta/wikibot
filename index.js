@@ -15,24 +15,18 @@ app.get('/', function(req, res){
 
 app.post('/post', function(req, res){
   var parsed_url = url.format({
-    pathname: 'https://en.wikipedia.org/w/api.php',
+    pathname: 'http://wiki.news.com.au/rest/prototype/1/search/name.json',
     query: {
-      action: 'query',
-      prop: 'extracts',
-      exintro: '',
-      explaintext: '',
-      prop: 'extracts',
-      format: 'json', //json format
-      titles: req.body.text // search query
+      query: req.body.text // search query
     }
   });
 
   request(parsed_url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var data = JSON.parse(body);
-      var obj = data.group;
+      //var obj = data.group;
 
-      var first_item = obj[Object.keys(obj)[0]];
+      //var first_item = obj[Object.keys(obj)[0]];
      // var first_snippet = first_page.extract.substring(0,250)+'...';
     //  var first_title = first_item.result[0].title;
      // var first_creator = (first_item.result[0].creator ? first_item.result[0].creator.displayName : "Anonymous")
