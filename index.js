@@ -40,18 +40,50 @@ if (!error && response.statusCode == 200) {
         description: obj.description,
         assignee: obj.assignee ? {
           name: obj.assignee.displayName,
-          email: obj.assignee.emailAddress
+          email: obj.assignee.emailAddress,
+          imgObj: obj.assignee.avatarUrls
         } : {},
         components: obj.components ? {
-          name: obj.components[0].name
+          name: obj.components[0] ? obj.components[0].name : "N/A"
         } : {},
         status: obj.status ? {
           name: obj.status.name,
           progress: obj.status.statusCategory.name,
           color: obj.status.statusCategory.color
         } : {},
-        reporter : obj.reporter.displayName
+        reporter : obj.reporter.displayName,
+        priority : obj.priority ? {
+          name: obj.priority.name
+        } : {},
+        issuetype: obj.issuetype ? {
+          name: obj.issuetype.name
+        } : {}
   };
+
+var priority = jira.priority.name, 
+    priorityColor;
+
+if (priority === "Major"){
+  priorityColor = "danger";
+}
+else if (priority === "Blocker"){
+  priorityColor = "#000000";
+}
+else if (priority === "Critical"){
+  priorityColor = "#FF0000";
+}
+else if (priority === "Minor"){
+  priorityColor = "good";
+}
+else if (priority === "Trivial"){
+  priorityColor = "#439FE0";
+}
+else {
+  priorityColor = "#cccccc";
+}
+
+
+
 
  /*var body = {
         response_type: "in_channel",
@@ -60,12 +92,14 @@ if (!error && response.statusCode == 200) {
 */
        var body = {
         response_type: "in_channel", // or ephemeral for messages lasting short while
-        text: jira.id + " ticket details...",
+        text: jira.id + " (priority: "+ priority.toLowerCase() + ") " + jira.issuetype.name.toUpperCase() + " details...",
         attachments: [
           {
+              fallback: "You should not be seeing this. Something went wrong...",
               title: jira.title,
               title_link: jira.url,
               text: jira.description,
+            //  image_url: jira.assignee.imgObj[Object.keys(jira.assignee.imgObj)[0]],
               fields: [
                 {
                     title: "Assignee",
@@ -74,7 +108,7 @@ if (!error && response.statusCode == 200) {
                 },
                 {
                     title: "Status",
-                    value: jira.status.name,
+                    value: jira.status.name.toUpperCase(),
                     short: true
                 },
                 {
@@ -88,7 +122,7 @@ if (!error && response.statusCode == 200) {
                     short: true
                 }
               ],
-              color: jira.status.color
+              color: priorityColor
           }
         ]
       };
