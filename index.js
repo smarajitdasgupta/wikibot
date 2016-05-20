@@ -10,28 +10,93 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', (process.env.PORT || 9001));
 
 app.get('/', function(req, res){
-  res.send('This works fine too!!');
+  res.send('News Jira works fine too!!');
 });
 
-app.post('/details', function(req, res){
+app.post('/detail', function(req, res){
 
- var username = 'reddyv1',
-   password = 'Cognizant@6065',
-   requestUrlwithAuth = 'http://' + username + ':' + password + '@wiki.news.com.au/rest/prototype/1/search/name.json';
 
-   var parsed_url = url.format({
-    pathname: requestUrlwithAuth,
-    query: {
-      query: req.body.text // search query
-    }
+
+var slackText = req.body.text;
+
+var username = 'dasguptas',
+    password = 'sdgpakai2K0',
+    requestUrlwithAuth = 'http://' + username + ':' + password + '@dashboard.news.com.au/rest/api/latest/issue/' + slackText;
+
+  var parsed_url = url.format({
+    pathname: requestUrlwithAuth
   });
 
-  request({url: parsed_url}, function (error, response, body) {
-  // Do more stuff with 'body' here 
-  /*smarajit try below for complete body*/
-    //res.send(JSON.parse(body));
-    res.send(JSON.parse(body).group[0].result[0].link[0].href);
-  //res.send(body.result.link[0]);
+console.log(parsed_url);
+
+request({url: parsed_url}, function (error, response, body) {
+if (!error && response.statusCode == 200) {
+  var data = JSON.parse(body);
+  var obj = data.fields,
+      jira = {
+        title: obj.summary,
+        id: data.key,
+        url: "http://dashboard.news.com.au/browse/"+data.key,
+        description: obj.description,
+        assignee: obj.assignee ? {
+          name: obj.assignee.displayName,
+          email: obj.assignee.emailAddress
+        } : {},
+        components: obj.components ? {
+          name: obj.components[0].name
+        } : {},
+        status: obj.status ? {
+          name: obj.status.name,
+          progress: obj.status.statusCategory.name,
+          color: obj.status.statusCategory.color
+        } : {},
+        reporter : obj.reporter.displayName
+  };
+
+ /*var body = {
+        response_type: "in_channel",
+        text: jira.title
+  };
+*/
+       var body = {
+        response_type: "in_channel", // or ephemeral for messages lasting short while
+        text: jira.id + " ticket details...",
+        attachments: [
+          {
+              title: jira.title,
+              title_link: jira.url,
+              text: jira.description,
+              fields: [
+                {
+                    title: "Assignee",
+                    value: jira.assignee.name,
+                    short: true
+                },
+                {
+                    title: "Status",
+                    value: jira.status.name,
+                    short: true
+                },
+                {
+                    title: "Reporter",
+                    value: jira.reporter,
+                    short: true
+                },
+                {
+                    title: "Component",
+                    value: jira.components.name,
+                    short: true
+                }
+              ],
+              color: jira.status.color
+          }
+        ]
+      };
+ 
+
+  res.send(body);
+}
+
 });
 });
 
