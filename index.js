@@ -42,7 +42,7 @@ app.post('/post', function(req, res){
 
       var body = {
         response_type: "ephemeral",
-        text: "Wikipedia says...",
+        text: "Wikipedia found...",
         attachments: [
         {
             title: first_page.title,
