@@ -7,12 +7,14 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.set('port', (process.env.PORT || 9001));
+app.set('port', (process.env.PORT || 7001));
 
 app.get('/', function(req, res){
-  res.send('Wikipedia works fine too!!');
+  res.send('Wikipedia works fine on port 7001!!');
 });
 
+
+// https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&titles=tiger
 app.post('/post', function(req, res){
   var parsed_url = url.format({
     pathname: 'https://en.wikipedia.org/w/api.php',
@@ -39,7 +41,7 @@ app.post('/post', function(req, res){
       var return_result =  result_url + " " + first_snippet;
 
       var body = {
-        response_type: "in_channel",
+        response_type: "ephemeral",
         text: "Wikipedia says...",
         attachments: [
         {
