@@ -43,7 +43,7 @@ app.post('/post', function(req, res){
 
       var body = {
         response_type: "ephemeral",
-        text: "Wikipedia found...",
+        text: "According to *Wikipedia*...",
         attachments: [
         {
             title: first_page.title,
@@ -53,8 +53,7 @@ app.post('/post', function(req, res){
             fields: [
                 {
                     title: "Page ID",
-                    value: page_id,
-                    short: true
+                    value: page_id //short: true
                 }
               ]
         }
