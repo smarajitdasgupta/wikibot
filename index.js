@@ -48,6 +48,7 @@ app.post('/post', function(req, res){
         {
             title: first_page.title,
             title_link: result_url,
+            thumb_url: "https://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png",
             text: first_snippet,
             fields: [
                 {
