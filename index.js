@@ -1,3 +1,6 @@
+/* a slash command bot for Slack */
+/* returns a summary from wikipedia for a searched query through slack */
+
 var express = require('express');
 var app = express();
 var url = require('url');
@@ -13,8 +16,9 @@ app.get('/', function(req, res){
   res.send('Wikipedia works fine on port 7001!!');
 });
 
-
+// rest api url format
 // https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&titles=tiger
+
 app.post('/post', function(req, res){
   var parsed_url = url.format({
     pathname: 'https://en.wikipedia.org/w/api.php',
@@ -43,7 +47,7 @@ app.post('/post', function(req, res){
       var return_result =  result_url + " " + first_snippet;
 
       var body = {
-        response_type: "ephemeral",
+        response_type: "ephemeral", // ephemeral is only visible to the user, other option is in_channel
         text: "According to *Wikipedia*...",
         attachments: [
         {
