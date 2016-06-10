@@ -37,6 +37,7 @@ app.post('/post', function(req, res){
       var first_page = obj[Object.keys(obj)[0]];
       var first_snippet = first_page.extract.substring(0,250)+'...';
       var result_url = 'http://en.wikipedia.org/wiki/' + first_page.title;
+      var page_id = first_page.pageid;
 
       var return_result =  result_url + " " + first_snippet;
 
@@ -47,9 +48,16 @@ app.post('/post', function(req, res){
         {
             title: first_page.title,
             title_link: result_url,
-            text: first_snippet
+            text: first_snippet,
+            fields: [
+                {
+                    title: "Page ID",
+                    value: page_id,
+                    short: true
+                }
+              ]
         }
-    ]
+      ]
       };
 
       res.send(body);
